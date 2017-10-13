@@ -27,4 +27,4 @@ public class Main {
  * - mozliwos� otworzenia pliku z baz� danych
  * - mozliwosc dodawania nowcyh produkt�w
  * */
-
+//	cos tam
