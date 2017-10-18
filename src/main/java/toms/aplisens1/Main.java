@@ -1,20 +1,13 @@
 package toms.aplisens1;
 
 import java.sql.*;
+import aplisens.db.DbDirector;
 
 public class Main {
 	public static void main(String args[])throws SQLException {
 
-		String polecenieSql="SELECT * FROM produkty";
-		
-		BazaConect baza=new BazaConect();
-		Statement myStmt=baza.connect();
-		Window okienko = new Window();
-		Ogolna abc=new Ogolna();
-		abc.listaSQL(myStmt, polecenieSql);
-		okienko.oknoTabeli(abc.getTablica1(),myStmt);
-
-//		baza.rozlaczSql(myStmt);
+		DbDirector myStmt= new DbDirector();
+		myStmt.odczyt();
 
 	}
 }
