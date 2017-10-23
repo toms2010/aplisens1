@@ -1,7 +1,12 @@
-C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\AdresBazy.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\read\ProductSpecialVersions.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\read\ProductType.java
+C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\Logic.java
 C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\Window.java
-C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\Ogolna.java
-C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\BazaConect.java
-C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\Produkt.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\DbAdress.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\DbConnect.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\read\Read.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\read\ProductStandardParameters.java
 C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\Main.java
-C:\java\eclips\workspace\aplisens1\src\main\java\toms\aplisens1\Abstrakcyjna.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\read\ListsInterface.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\read\ProductModels.java
+C:\java\eclips\workspace\aplisens1\src\main\java\aplisens\db\DbDirector.java

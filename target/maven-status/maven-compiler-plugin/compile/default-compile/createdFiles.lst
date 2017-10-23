@@ -1,7 +1,12 @@
-toms\aplisens1\AdresBazy.class
-toms\aplisens1\BazaConect.class
+aplisens\db\DbConnect.class
+aplisens\db\DbAdress.class
+aplisens\db\read\ProductStandardParameters.class
+aplisens\db\read\ProductSpecialVersions.class
 toms\aplisens1\Window.class
-toms\aplisens1\Produkt.class
-toms\aplisens1\Ogolna.class
+toms\aplisens1\Logic.class
+aplisens\db\read\Read.class
+aplisens\db\read\ProductType.class
 toms\aplisens1\Main.class
-toms\aplisens1\Abstrakcyjna.class
+aplisens\db\DbDirector.class
+aplisens\db\read\ListsInterface.class
+aplisens\db\read\ProductModels.class

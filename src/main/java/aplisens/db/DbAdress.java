@@ -2,8 +2,12 @@ package aplisens.db;
 
 import java.io.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class DbAdress {
 	
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private String dbUrl;
 	private String user;		
 	private String pass;
@@ -29,7 +33,7 @@ public class DbAdress {
 			raf = new RandomAccessFile(file, "r");		
 			}
 		catch(FileNotFoundException e) {
-			System.out.println("Brak pliku!: "+fileName);
+			log.error("Brak pliku!: "+fileName);
 			}
 		
 		try {
@@ -38,7 +42,7 @@ public class DbAdress {
 			this.pass=raf.readLine();
 			}
 		catch(IOException e) {
-			System.out.println("Błąd wczytywania pliku: "+file);
+			log.error("Błąd wczytywania pliku: "+fileName);
 			}
 		
 		checkRead();

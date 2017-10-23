@@ -14,6 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import aplisens.db.read.ListsInterface;
+import aplisens.db.read.ProductModels;
+import aplisens.db.read.ProductType;
+
 public class Window extends JFrame implements ActionListener {
 
 	int c;
@@ -29,7 +33,7 @@ public class Window extends JFrame implements ActionListener {
 	Object[][] tablica1;
 
 	Statement myStmt;
-	Ogolna axx= new Ogolna();
+	ProductType axx= new ProductType();
 	
 	
 	String getXlal() {
@@ -53,7 +57,7 @@ public class Window extends JFrame implements ActionListener {
 		tab = new JTable(tabelka,kolumny);
 		tab.setPreferredScrollableViewportSize(new Dimension(400,50));
 		tab.setFillsViewportHeight(true);
-		tab2 = new JTable(axx.getTablica1(),kolumny);
+		tab2 = new JTable(axx.getProductsTypes(),kolumny);
 		tab2.setPreferredScrollableViewportSize(new Dimension(400,50));
 		tab2.setFillsViewportHeight(true);
 		
@@ -83,7 +87,7 @@ public class Window extends JFrame implements ActionListener {
 //		tablica.setLayout(null);
 
 		c= tab2.getSelectionModel().getLeadSelectionIndex();
-		tablica1=axx.getTablica1();
+//		tablica1=axx.getTablica1();
 		naglowek = new JLabel("SG/0..");
 //		naglowek.setBounds(50, 50, 90, 55);
 		pole = new JTextField();
@@ -112,7 +116,7 @@ public class Window extends JFrame implements ActionListener {
 			String polecenieSql="SELECT * FROM "+x;
 			try 
 			{
-				axx.listaSQL(myStmt, polecenieSql);
+				axx.selectMethod(myStmt);
 			}
 			catch (SQLException e) 
 			{

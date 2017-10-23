@@ -8,7 +8,6 @@ public class Main {
 
 		DbDirector myStmt= new DbDirector();
 		myStmt.odczyt();
-
 	}
 }
 

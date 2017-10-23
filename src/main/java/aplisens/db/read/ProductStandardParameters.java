@@ -4,12 +4,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ProductStandardParameters implements ListsInterface {
 
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 	private String productStandard[][]= new String[10][2];
 	private String productType="PC";
 	private String productModel="PC28";
+	private String commandSQL="select nazwa, wartosc FROM parametry_"
+			+productType+" WHERE wystepowanie LIKE '%"
+			+productModel+"%'";
+	
+	
+	public ResultSet selectMethod(Statement myStmt) throws SQLException {
+		myRs=myStmt.executeQuery(commandSQL);
+		int i=0;
+		while (myRs.next()){
+			productStandard[i][0]=myRs.getString("nazwa");
+			productStandard[i][1]=myRs.getString("wartosc");
+			log.debug(productStandard[i][0]+": "+productStandard[i][1]);
+			i++;
+		}
+		return myRs;
+	}
 	
 	public String getProductType() {
 		return productType;
@@ -19,28 +39,18 @@ public class ProductStandardParameters implements ListsInterface {
 		this.productType = productType;
 	}
 	
-	String getProductModel() {
+	public String getProductModel() {
 		return productModel;
 	}
 
-	void setProductModel(String productModel) {
+	public void setProductModel(String productModel) {
 		this.productModel = productModel;
 	}
 
-
-	private String commandSQL="select nazwa, wartosc FROM parametry_"
-			+productType+" WHERE wystepowanie LIKE '%"
-			+productModel+"%'";
-	
-	public ResultSet selectMethod(Statement myStmt) throws SQLException {
-		myRs=myStmt.executeQuery(commandSQL);
-		int i=0;
-		while (myRs.next()){
-			productStandard[i][0]=myRs.getString("nazwa");
-			productStandard[i][1]=myRs.getString("wartosc");
-			System.out.println(productStandard[i][0]+": "+productStandard[i][1]);
-			i++;
-		}
-		return myRs;
+	public String[][] getProductStandard() {
+		return productStandard;
 	}
+	
+	
+	
 }

@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Read{
 
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 	
 	public void read(Statement myStmt, ListsInterface list){
@@ -13,15 +17,15 @@ public class Read{
 			myRs=list.selectMethod(myStmt);
 		}
 		catch (Exception exc){
-			exc.printStackTrace();
+			log.error("Błąd podczas odczytu z bazy danych");
 		}
 		finally {
 			if (myRs != null) {
 				try {
 					myRs.close();
-					System.out.println("myRS Disconnect");
+					log.info("Zamknięto ResultSet");
 				} catch (SQLException e) {
-					e.printStackTrace();
+					log.error("Błąd podczas zamykania ResultSet");
 				}
 			}
 		}

@@ -2,8 +2,13 @@ package aplisens.db;
 
 import java.sql.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class DbConnect {
 	
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private Connection myConn = null;
 	private Statement myStmt = null;
 
@@ -13,10 +18,10 @@ public class DbConnect {
 		try {
 			myConn=DriverManager.getConnection(file.getDbUrl(), file.getUser(), file.getUser());
 			myStmt=myConn.createStatement();
-			System.out.println("Połączono!");
+			log.info("Połączono!");
 		}
 		catch (SQLException exc){
-			System.out.println("Błąd połczenia z bazą SQL");
+			log.error("Błąd połczenia z bazą SQL");
 		}
 		return myStmt;
 	}
@@ -27,17 +32,17 @@ public class DbConnect {
 			try {
 				myStmt.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error("Błąd podczas zamykania Statement");
 			}
-			System.out.println("Zamknięto stmt");
+			log.info("Zamknięto Statement");
 		}
 		if (myConn != null) {
 			try {
 				myConn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log.error("Błąd podczas zamykania połączenia");
 			}
-			System.out.println("Zamknięto połączenie");
+			log.info("Zamknięto połączenie");
 		}
 	}
 	
