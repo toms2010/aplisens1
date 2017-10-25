@@ -11,22 +11,11 @@ public class DbAdress {
 	private String dbUrl;
 	private String user;		
 	private String pass;
-	private File file;
-	
-	String getDbUrl() {
-		return dbUrl;
-	}
-	String getUser() {
-		return user;
-	}
-	String getPass() {
-		return pass;
-	}	
-	
+
 	
 	public DbAdress read(String fileName) {
 		
-		file= new File(fileName);
+		File file= new File(fileName);
 		RandomAccessFile raf=null;
 
 		try {
@@ -50,7 +39,7 @@ public class DbAdress {
 	}
 	
 	
-	public void checkRead() {
+	private void checkRead() {
 		if (this.dbUrl.length()<1 | this.user.length()<1) {
 			throw new RuntimeException("Nie udało się odczytać adresu bazy lub nazwy użytkownika z pliku");
 		}
@@ -61,6 +50,19 @@ public class DbAdress {
 		return "DbAdress [dbUrl=" + dbUrl + ", user=" + user + ", pass=" + pass + "]";
 	}
 	
+	String getDbUrl() {
+		return dbUrl;
+	}
+	String getUser() {
+		return user;
+	}
+	String getPass() {
+		return pass;
+	}	
+	
+	DbAdress getDbAdress() {
+		return this;
+	}
 	
 }
 

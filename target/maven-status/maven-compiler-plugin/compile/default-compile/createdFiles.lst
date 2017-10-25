@@ -1,12 +1,12 @@
 aplisens\db\DbConnect.class
 aplisens\db\DbAdress.class
-aplisens\db\read\ProductStandardParameters.class
 aplisens\db\read\ProductSpecialVersions.class
 toms\aplisens1\Window.class
-toms\aplisens1\Logic.class
 aplisens\db\read\Read.class
 aplisens\db\read\ProductType.class
-toms\aplisens1\Main.class
-aplisens\db\DbDirector.class
 aplisens\db\read\ListsInterface.class
 aplisens\db\read\ProductModels.class
+aplisens\db\read\ProductStandardParameters.class
+toms\aplisens1\Logic.class
+toms\aplisens1\Main.class
+aplisens\db\DbDirector.class

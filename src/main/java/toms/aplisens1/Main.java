@@ -7,7 +7,14 @@ public class Main {
 	public static void main(String args[])throws SQLException {
 
 		DbDirector myStmt= new DbDirector();
-		myStmt.odczyt();
+		Window w = new Window();
+//		myStmt.połączenie();
+		myStmt.odczytType();
+//		myStmt.odczytModel();
+//		myStmt.odczytParameters();
+//		myStmt.odczytVersion();
+
+		w.oknoTabeli(null, null);
 	}
 }
 

@@ -7,31 +7,52 @@ import aplisens.db.read.ProductSpecialVersions;
 import aplisens.db.read.ProductStandardParameters;
 import aplisens.db.read.ProductType;
 import aplisens.db.read.Read;
+import toms.aplisens1.Logic;
 
 public class DbDirector{
 	
-	private String fileName="baza.txt";
+	private String fileName="src/main/resources/baza.txt";
 	
 	DbAdress adress = new DbAdress();
 	DbConnect connect = new DbConnect();
 	Statement myStmt;
 	
-	Read czytanko= new Read();	
-	ProductType cos= new ProductType();
-	ProductModels cos1= new ProductModels();
-	ProductStandardParameters cos2= new ProductStandardParameters();
-	ProductSpecialVersions cos3= new ProductSpecialVersions();
+	Read reading= new Read();	
+	ProductType type= new ProductType();
+	ProductModels models= new ProductModels();
+	ProductStandardParameters parameters= new ProductStandardParameters();
+	ProductSpecialVersions version= new ProductSpecialVersions();
+	Logic logic= new Logic();
 	
-	public void odczyt(){
+//	public void połączenie() {
+//		adress.read(fileName);
+//		myStmt=connect.connect(adress);
+//	}
+	
+	public ProductType odczytType() {
 		adress.read(fileName);
-		System.out.println(adress.toString()); 
 		myStmt=connect.connect(adress);
-		
-		czytanko.read(myStmt, cos);	
-		czytanko.read(myStmt, cos1);		
-		czytanko.read(myStmt, cos2);
-		czytanko.read(myStmt, cos3);	
-		
+		reading.read(myStmt, type,logic.getTags());	
 		connect.dbDisconnect(myStmt);
+		return type;
 	}
+	
+	public ProductModels odczytModel() {
+		reading.read(myStmt, models,logic.getTags());
+		return models;
+	}
+	
+	public ProductStandardParameters odczytParameters() {
+		reading.read(myStmt, parameters,logic.getTags());	
+		return parameters;
+	}
+	
+	public ProductSpecialVersions odczytVersion() {
+		reading.read(myStmt, version,logic.getTags());	
+		return version;
+	}
+	
+//	public void rozlacz() {
+//		connect.dbDisconnect(myStmt);
+//	}
 }

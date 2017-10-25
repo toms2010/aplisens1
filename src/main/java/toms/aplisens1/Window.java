@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.swing.JButton;
@@ -14,15 +13,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
-import aplisens.db.read.ListsInterface;
-import aplisens.db.read.ProductModels;
-import aplisens.db.read.ProductType;
+import aplisens.db.DbDirector;
 
 public class Window extends JFrame implements ActionListener {
 
 	int c;
 	String x;
-	String[] kolumny = {"id", "opis", "nazwa"};
+	String[] kolumny = {"id", "opis"};
+	
 	
 	JTable tab,tab2;
 	JLabel naglowek,naglowek2;
@@ -33,15 +31,13 @@ public class Window extends JFrame implements ActionListener {
 	Object[][] tablica1;
 
 	Statement myStmt;
-	ProductType axx= new ProductType();
-	
+	DbDirector axx= new DbDirector();
 	
 	String getXlal() {
 		return x;
 	}
 
 	public Window(){
-		
 		setLayout(new FlowLayout());
 		setTitle("Aplisens Aparatura");
 		setLocation(250, 200);
@@ -52,17 +48,18 @@ public class Window extends JFrame implements ActionListener {
 	public void oknoTabeli(Object tabelka[][],Statement myStmt){
 		this.myStmt=myStmt;
 		tablica= new Window();
-		tablica1=tabelka;
+		tablica1=axx.odczytType().getTable();
 		
-		tab = new JTable(tabelka,kolumny);
+		System.out.println(tablica1);
+		tab = new JTable(tablica1,kolumny);
 		tab.setPreferredScrollableViewportSize(new Dimension(400,50));
 		tab.setFillsViewportHeight(true);
-		tab2 = new JTable(axx.getProductsTypes(),kolumny);
+		tab2 = new JTable(tablica1,kolumny);
 		tab2.setPreferredScrollableViewportSize(new Dimension(400,50));
 		tab2.setFillsViewportHeight(true);
 		
 		naglowek = new JLabel("Lista produktów :");
-		naglowek2 = new JLabel("Lista produktów "+x+":");
+		naglowek2 = new JLabel("Lista produktów 2");
 		
 		JScrollPane scroll= new JScrollPane(tab);
 		JScrollPane scroll2= new JScrollPane(tab2);
@@ -84,14 +81,9 @@ public class Window extends JFrame implements ActionListener {
 	public void parametry()
 	{
 		tablica= new Window();
-//		tablica.setLayout(null);
-
 		c= tab2.getSelectionModel().getLeadSelectionIndex();
-//		tablica1=axx.getTablica1();
 		naglowek = new JLabel("SG/0..");
-//		naglowek.setBounds(50, 50, 90, 55);
 		pole = new JTextField();
-//		pole.setBounds(90, 50, 91, 55);
 		naglowek2 = new JLabel("/4..20mA/L=");
 		pole2 = new JTextField();
 		
@@ -102,7 +94,6 @@ public class Window extends JFrame implements ActionListener {
 		
 		tablica.setVisible(true);
 		System.out.println("wybrano w parametrach "+tablica1[c][1]+" : "+tablica1[c][2]);
-		
 	}
 		
 	public void actionPerformed(ActionEvent a) 
@@ -112,16 +103,16 @@ public class Window extends JFrame implements ActionListener {
 		{
 			tablica.setVisible(false);
 			c= tab.getSelectionModel().getLeadSelectionIndex();
-			x=String.valueOf(tablica1[c][2]);
-			String polecenieSql="SELECT * FROM "+x;
-			try 
-			{
-				axx.selectMethod(myStmt);
-			}
-			catch (SQLException e) 
-			{
-				e.printStackTrace();
-			}
+			x=String.valueOf(tablica1[c][0]);
+			System.out.println(x);
+//			try 
+//			{
+//				axx.selectMethod(myStmt);
+//			}
+//			catch (SQLException e) 
+//			{
+//				e.printStackTrace();
+//			}
 			oknoTabeli(tablica1 ,myStmt);
 		}
 		if (zrodlo==przycisk2)
@@ -132,6 +123,3 @@ public class Window extends JFrame implements ActionListener {
 	}
 }	
 	
-	
-// cos z polimrfizemem pomy�le�
-// po co klasy og�lna ? czy abstrakcyjna ma sens byc abstrakcyjna

@@ -3,52 +3,58 @@ package aplisens.db.read;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import aplisens.db.listsTypes.Version;
+import toms.aplisens1.Tag;
 
 public class ProductSpecialVersions implements  ListsInterface{
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
-	private String productStandard[][]= new String[10][3];
-	private String productType="PC";
-	private String productModel="PC28";
-	private String commandSQL="select nazwa, cena, opis FROM wykonania_"
-			+productType+" WHERE wystepowanie LIKE '%"
-			+productModel+"%'";
+	private List<Version> dbList = new ArrayList<>();
+	private String[][] dbTable;
+	private String[] tabLable= {"nazwa", "opis","cena"};
 	
-	public ResultSet selectMethod(Statement myStmt) throws SQLException {
+	
+	public ResultSet selectMethod(Statement myStmt,Tag tag) throws SQLException {
+		String commandSQL="select nazwa, cena, opis FROM wykonania_"
+				+tag.getProductTypeTag()+" WHERE wystepowanie LIKE '%"
+				+tag.getProductModelTag()+"%'";
 		myRs=myStmt.executeQuery(commandSQL);
-		int i=0;
 		while (myRs.next()){
-			productStandard[i][0]=myRs.getString("nazwa");
-			productStandard[i][1]=myRs.getString("cena");
-			productStandard[i][2]=myRs.getString("opis");
-			log.debug(productStandard[i][0]+": "+productStandard[i][1]);
-			i++;
+			dbList.add(new Version(myRs.getFloat("cena"),myRs.getString("nazwa"),myRs.getString("opis"),false));
 		}
+		log.debug(dbList.toString());
 		return myRs;
 	}
+
+	public String[][] getTable() {
+		dbTable = new String[dbList.size()][3];
+		for(int i=0; i<dbList.size(); i++) {
+			dbTable[i][0]=dbList.get(i).getNazwa();
+			dbTable[i][1]=dbList.get(i).getOpis();
+			float temp=dbList.get(i).getCena();
+			dbTable[i][2]=String.valueOf(temp);
+		}
+		return dbTable;
+	}
 	
-	public String getProductType() {
-		return productType;
-	}
-
-	public void setProductType(String productType) {
-		this.productType = productType;
+	public String[] getTabLabel() {
+		return tabLable;
 	}
 	
-	public String getProductModel() {
-		return productModel;
+	
+	
+	
+	
+	public List<Version> getDbList() {
+		return dbList;
 	}
-
-	public void setProductModel(String productModel) {
-		this.productModel = productModel;
-	}
-
-	public String[][] getProductStandard() {
-		return productStandard;
-	}
+	
 	
 }
