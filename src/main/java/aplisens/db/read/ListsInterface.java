@@ -6,9 +6,8 @@ import java.sql.Statement;
 
 import toms.aplisens1.Tag;
 
-
 public interface ListsInterface {
-	
+
 	ResultSet selectMethod(Statement myRs, Tag tag) throws SQLException;
-	
+
 }

@@ -6,64 +6,56 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DbAdress {
-	
+
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private String dbUrl;
-	private String user;		
+	private String user;
 	private String pass;
+	File file;
+	RandomAccessFile raf = null;
 
-	
-	public DbAdress read(String fileName) {
-		
-		File file= new File(fileName);
-		RandomAccessFile raf=null;
+	public DbAdress getDbAdress(String fileName) {
+
+		file = new File(fileName);
 
 		try {
-			raf = new RandomAccessFile(file, "r");		
-			}
-		catch(FileNotFoundException e) {
-			log.error("Brak pliku!: "+fileName);
-			}
-		
+			raf = new RandomAccessFile(file, "r");
+		} catch (FileNotFoundException e) {
+			log.error("Brak pliku!: " + fileName);
+		}
+
 		try {
-			this.dbUrl=raf.readLine();
-			this.user=raf.readLine();
-			this.pass=raf.readLine();
-			}
-		catch(IOException e) {
-			log.error("Błąd wczytywania pliku: "+fileName);
-			}
-		
+			this.dbUrl = raf.readLine();
+			this.user = raf.readLine();
+			this.pass = raf.readLine();
+		} catch (IOException e) {
+			log.error("Błąd wczytywania pliku: " + fileName);
+		}
+
 		checkRead();
 		return new DbAdress();
 	}
-	
-	
+
 	private void checkRead() {
-		if (this.dbUrl.length()<1 | this.user.length()<1) {
+		if (this.dbUrl.length() < 1 | this.user.length() < 1) {
 			throw new RuntimeException("Nie udało się odczytać adresu bazy lub nazwy użytkownika z pliku");
 		}
 	}
 
 	@Override
 	public String toString() {
-		return "DbAdress [dbUrl=" + dbUrl + ", user=" + user + ", pass=" + pass + "]";
+		return "Adres bazy danych: [dbUrl=" + dbUrl + ", user=" + user + ", pass=" + pass + "]";
 	}
-	
+
 	String getDbUrl() {
 		return dbUrl;
 	}
+
 	String getUser() {
 		return user;
 	}
+
 	String getPass() {
 		return pass;
-	}	
-	
-	DbAdress getDbAdress() {
-		return this;
 	}
-	
 }
-
-
