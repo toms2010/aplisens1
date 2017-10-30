@@ -2,58 +2,54 @@ package aplisens.db;
 
 import java.sql.Statement;
 
-import aplisens.db.read.ProductModels;
-import aplisens.db.read.ProductSpecialVersions;
-import aplisens.db.read.ProductStandardParameters;
-import aplisens.db.read.ProductType;
-import aplisens.db.read.Read;
-import toms.aplisens1.Logic;
+import aplisens.db.read.ProductModelSelect;
+import aplisens.db.read.ProducVersionsSelect;
+import aplisens.db.read.ProductParametersSelect;
+import aplisens.db.read.ProductTypeSelect;
+import aplisens.db.read.ReadFromDb;
 
 public class DbDirector {
-	// pomyśleć nad tą klasą
-
-	private String fileName = "src/main/resources/baza.txt";
+	private static final String FILE_NAME = "src/main/resources/baza.txt";
 
 	DbAdress adress = new DbAdress();
 	DbConnect connect = new DbConnect();
 	Statement myStmt;
+	ReadFromDb read = new ReadFromDb();
 
-	Read reading = new Read();
-	ProductType type = new ProductType();
-	ProductModels models = new ProductModels();
-	ProductStandardParameters parameters = new ProductStandardParameters();
-	ProductSpecialVersions version = new ProductSpecialVersions();
-	Logic logic = new Logic();
+	ProductTypeSelect type = new ProductTypeSelect();
+	ProductModelSelect models = new ProductModelSelect();
+	ProductParametersSelect parameters = new ProductParametersSelect();
+	ProducVersionsSelect version = new ProducVersionsSelect();
 
-	// public void połączenie() {
-	// adress.read(fileName);
-	// myStmt=connect.connect(adress);
-	// }
+	public DbDirector() {
+		adress.getDbAdress(FILE_NAME);
+	}
 
-	public ProductType odczytType() {
-		adress.getDbAdress(fileName);
+	public ProductTypeSelect odczytType() {
 		myStmt = connect.getStatement(adress);
-		reading.read(myStmt, type, logic.getTags());
+		read.readFromDb(myStmt, type);
 		connect.dbDisconnecting(myStmt);
 		return type;
 	}
 
-	public ProductModels odczytModel() {
-		reading.read(myStmt, models, logic.getTags());
+	public ProductModelSelect odczytModel() {
+		myStmt = connect.getStatement(adress);
+		read.readFromDb(myStmt, models);
+		connect.dbDisconnecting(myStmt);
 		return models;
 	}
 
-	public ProductStandardParameters odczytParameters() {
-		reading.read(myStmt, parameters, logic.getTags());
+	public ProductParametersSelect odczytParameters() {
+		myStmt = connect.getStatement(adress);
+		read.readFromDb(myStmt, parameters);
+		connect.dbDisconnecting(myStmt);
 		return parameters;
 	}
 
-	public ProductSpecialVersions odczytVersion() {
-		reading.read(myStmt, version, logic.getTags());
+	public ProducVersionsSelect odczytVersion() {
+		myStmt = connect.getStatement(adress);
+		read.readFromDb(myStmt, version);
+		connect.dbDisconnecting(myStmt);
 		return version;
 	}
-
-	// public void rozlacz() {
-	// connect.dbDisconnect(myStmt);
-	// }
 }

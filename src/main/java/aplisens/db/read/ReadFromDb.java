@@ -7,16 +7,14 @@ import java.sql.Statement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import toms.aplisens1.Tag;
-
-public class Read {
+public class ReadFromDb {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 
-	public void read(Statement myStmt, ListsInterface list, Tag tag) {
+	public void readFromDb(Statement myStmt, ListsInterface list) {
 		try {
-			myRs = list.selectMethod(myStmt, tag);
+			myRs = list.selectMethod(myStmt);
 		} catch (Exception exc) {
 			log.error("Błąd podczas odczytu z bazy danych");
 		} finally {

@@ -1,21 +1,18 @@
 package toms.aplisens1;
 
 public class Tag {
-	private String productTypeTag, productModelTag;
+	public static String productTypeTag;
+	public static String productModelTag;
 
 	public String getProductTypeTag() {
 		return productTypeTag;
 	}
 
-	public void setProductTypeTag(String productTypeTag) {
-		this.productTypeTag = productTypeTag;
-	}
-
 	public String getProductModelTag() {
 		return productModelTag;
 	}
-
-	public void setProductModelTag(String productModelTag) {
-		this.productModelTag = productModelTag;
+	
+	public Tag getTags() {
+		return this;
 	}
 }

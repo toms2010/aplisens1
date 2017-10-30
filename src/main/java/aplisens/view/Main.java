@@ -1,28 +1,23 @@
 package aplisens.view;
 
-import javafx.application.*;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class View extends Application {
-
+public class Main extends Application {
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(this.getClass().getResource("/Scenka.fxml"));
-		Pane stackPane = loader.load();
-
-		// Controller controller = loader.getController();
-
-		Scene scene = new Scene(stackPane);
-
+		
+		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainBorderPane.fxml"));
+		BorderPane borderPane = loader.load();
+		Scene scene= new Scene(borderPane);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Aplisens");
 		primaryStage.show();
