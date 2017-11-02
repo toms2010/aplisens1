@@ -15,10 +15,11 @@ import aplisens.db.listsTypes.ProductType;
 public class ProductTypeSelect implements ListsInterface {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-	private List<ProductType> dbList = new ArrayList<>();
+	private List<ProductType> dbList;
 	private ResultSet myRs = null;
 
 	public ResultSet selectMethod(Statement myStmt) throws SQLException {
+		dbList = new ArrayList<>();
 		String commandSQL = "SELECT tag, opis, MIN(id_pr) FROM produkty GROUP BY tag";
 		myRs = myStmt.executeQuery(commandSQL);
 		while (myRs.next()) {

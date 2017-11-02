@@ -10,17 +10,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import aplisens.db.listsTypes.ProductParameters;
-import toms.aplisens1.Tag;
+import aplisens.view.controllers.Properties;
 
 public class ProductParametersSelect implements ListsInterface {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
-	private List<ProductParameters> dbList = new ArrayList<>();
+	private List<ProductParameters> dbList;
+	private Properties proper = Properties.getInstance();
 
 	public ResultSet selectMethod(Statement myStmt) throws SQLException {
-		String commandSQL = "select nazwa, wartosc FROM parametry_" + Tag.productTypeTag
-				+ " WHERE wystepowanie LIKE '%" + Tag.productModelTag + "%'";
+		dbList = new ArrayList<>();
+		String commandSQL = "select nazwa, wartosc FROM parametry_" + proper.getProductTag().get()
+				+ " WHERE wystepowanie LIKE '%" + proper.getModelTag().get() + "%'";
+		log.info(commandSQL);
 		myRs = myStmt.executeQuery(commandSQL);
 		while (myRs.next()) {
 			dbList.add(new ProductParameters(myRs.getString("nazwa"), myRs.getString("wartosc")));

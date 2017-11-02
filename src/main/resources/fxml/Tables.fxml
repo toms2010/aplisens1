@@ -7,8 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplisens.view.controllers.TablesController">
+<VBox prefHeight="450.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aplisens.view.controllers.TablesController">
    <children>
       <Label text="Kategorie urządzeń pomiarowych" />
       <HBox spacing="30.0">
@@ -22,6 +23,10 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
+            <Label prefHeight="108.0" prefWidth="252.0" text="Wybierz kategorie produktów, a nastepnie model urządzenia" wrapText="true">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
          </children>
          <VBox.margin>
             <Insets bottom="10.0" right="10.0" />
@@ -31,7 +36,7 @@
          </padding>
       </HBox>
       <Label text="Modele urządzeń" />
-      <HBox spacing="30.0">
+      <HBox prefWidth="700.0" spacing="30.0">
          <children>
             <TableView fx:id="productTableViwe" onMouseClicked="#selectedProduct" prefHeight="250.0" prefWidth="400.0">
               <columns>
@@ -43,7 +48,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button mnemonicParsing="false" onAction="#confirmProduct" text="Dalej" />
+            <Button fx:id="confirm" mnemonicParsing="false" onAction="#confirmProduct" text="Dalej" />
          </children>
          <padding>
             <Insets bottom="10.0" right="10.0" />

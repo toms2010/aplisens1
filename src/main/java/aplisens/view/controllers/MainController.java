@@ -24,12 +24,12 @@ public class MainController {
 	@FXML
 	public void initialize() {
 		setWindow("/fxml/Tables.fxml",tablesController);
-		log.info("Wybrano okno Tables");
+		log.debug("Wczytano okno Tables");
 	}
 
 	@FXML
 	public void load() {
-		log.info("load");
+		log.info("jeszcze nie ustawiona fnkcjonalność");
 	}
 	
 	@FXML

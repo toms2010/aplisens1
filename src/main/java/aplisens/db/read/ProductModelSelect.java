@@ -10,18 +10,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import aplisens.db.listsTypes.ProductModel;
-import toms.aplisens1.Tag;
+import aplisens.view.controllers.Properties;
 
 public class ProductModelSelect implements ListsInterface {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 	private List<ProductModel> dbList;
+	private Properties proper = Properties.getInstance();
 
 	public ResultSet selectMethod(Statement myStmt) throws SQLException {
 		dbList = new ArrayList<>();
 		String commandSQL = "SELECT nazwa, opis, cena , dok_opis FROM produkty WHERE tag LIKE '"
-				+ Tag.productTypeTag + "'";
+				+ proper.getProductTag().get() + "'";
 		myRs = myStmt.executeQuery(commandSQL);
 		while (myRs.next()) {
 			dbList.add(new ProductModel(myRs.getString("nazwa"), myRs.getString("dok_opis"), myRs.getFloat("cena")));

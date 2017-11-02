@@ -6,13 +6,21 @@ import org.slf4j.LoggerFactory;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductModel;
 import aplisens.db.listsTypes.ProductType;
+import javafx.beans.InvalidationListener;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import toms.aplisens1.Tag;
+import javafx.util.converter.NumberStringConverter;
+
 
 public class TablesController implements ViewControllerInterface {
 
@@ -20,8 +28,8 @@ public class TablesController implements ViewControllerInterface {
 
 	private MainController mainController;
 	private DbDirector dbDirector = new DbDirector();
+	private Properties property = Properties.getInstance();
 
-	
 	@FXML
 	private TableView<ProductType> typeTableView;
 	@FXML
@@ -36,32 +44,49 @@ public class TablesController implements ViewControllerInterface {
 	@FXML
 	private TableColumn<ProductModel, String> productDescriptionColumn;
 	@FXML
-	private TableColumn<ProductModel, String> productPriceColumn;
+	private TableColumn<ProductModel, Float> productPriceColumn;
+	
+	@FXML
+	private Button confirm;
 
 	@FXML
 	private void selectedType() {
-		ProductType selectedTag = typeTableView.getSelectionModel().getSelectedItem();
-		Tag.productTypeTag = (selectedTag.getTag());
+		property.setProductTag(new SimpleStringProperty(typeTableView.getSelectionModel().getSelectedItem().getTag()));
+		log.debug("Wybrano produkt typu: "+ property.getModelTag());
 		secondTable();
 	}
 
 	@FXML
 	private void selectedProduct() {
-		log.info("selectedProduct");
+		property.setModelTag(new SimpleStringProperty(productTableViwe.getSelectionModel().getSelectedItem().getName()));
+		log.debug("Wybrano model produktu: "+ property.getModelTag());
 	}
-
+	
+	
 	@FXML
 	private void confirmProduct() {
-		mainController.setWindow("/fxml/Product.fxml", new ProductController());
-		log.info("Wybrano okno Product - confirmProduct");
+		//Dorobić nieaktywnośc przycisku!!
+		if ("SG".equals(property.getProductTag().get())) {
+			mainController.setWindow("/fxml/SG.fxml", new SGController());
+			log.debug("Wybrano okno SG");	
+		}
+		else if("PC".equals(property.getProductTag().get())) {
+			mainController.setWindow("/fxml/PC.fxml", new PCController());
+			log.debug("Wybrano okno PC");	
+		}
+		else {
+			log.error("Nie wybrano produktu!");	
+		}
 	}
 
 	@FXML
 	public void initialize() {
+		
 		ObservableList<ProductType> data = FXCollections.observableArrayList(dbDirector.odczytType().getDbList());
 		typeTagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
 		typeNameColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 		typeTableView.setItems(data);
+		confirm.disableProperty().bind(property.getButtonProperty());
 	}
 
 	public void secondTable() {
