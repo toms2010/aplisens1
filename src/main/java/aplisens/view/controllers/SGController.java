@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import aplisens.Logic;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductParameters;
 import aplisens.db.listsTypes.ProductVersion;
@@ -24,7 +25,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.converter.NumberStringConverter;
-import toms.aplisens1.Logic;
 
 public class SGController implements ViewControllerInterface {
 
@@ -43,18 +43,18 @@ public class SGController implements ViewControllerInterface {
 	@FXML
 	private ChoiceBox<String> cableType;
 	@FXML
-	private TextField price;
-
+	private Label price;
+	
 	@FXML
-	private CheckBox checkBox1;
+	private CheckBox checkBox1SG;
 	@FXML
-	private CheckBox checkBox2;
+	private CheckBox checkBox2SG;
 	@FXML
-	private CheckBox checkBox3;
+	private CheckBox checkBox3SG;
 	@FXML
-	private CheckBox checkBox4;
+	private CheckBox checkBox4SG;
 	@FXML
-	private CheckBox checkBox5;
+	private CheckBox checkBox5SG;
 
 	@FXML
 	private TableView<ProductParameters> parametersTableView;
@@ -65,28 +65,28 @@ public class SGController implements ViewControllerInterface {
 
 	@FXML
 	public void initialize() {
-// --------Rodzaje kabli
+		// --------Rodzaje kabli
 		cableType.getItems().addAll("PCV", "Teflon", "Inny", "Jeszcze inny");
 		cableType.getSelectionModel().selectFirst();
+		properties.setCableType(new SimpleStringProperty(cableType.getSelectionModel().getSelectedItem()));
 		cableType.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				properties.setCableType(new SimpleStringProperty(newValue));
 			}
 		});
-// --------Wykonania -- ok
+		// --------Wykonania
 		checkBoxText();
 		checkBoxBinds();
-// --------Nagłówek --- ok
+		// --------Nagłówek
 		productName.setText(properties.getModelTag().get());
-		range.textProperty().bindBidirectional(properties.getRange(), new NumberStringConverter());
-		length.textProperty().bindBidirectional(properties.getLength(), new NumberStringConverter());
-// --------Tabela ProductParameters -ok
+		range.textProperty().bindBidirectional(properties.getMeasurementRange(), new NumberStringConverter());
+		length.textProperty().bindBidirectional(properties.getCableLength(), new NumberStringConverter());
+		// --------Tabela ProductParameters
 		ObservableList<ProductParameters> data = FXCollections
 				.observableArrayList(dbDirector.odczytParameters().getDbList());
 		parametersNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		parametersValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 		parametersTableView.setItems(data);
-		price.textProperty().bindBidirectional(properties.getPrice(), new NumberStringConverter());
 	}
 
 	@FXML
@@ -98,40 +98,36 @@ public class SGController implements ViewControllerInterface {
 
 	@FXML
 	public void countPrice() {
-		log.debug(properties.getCableType().get());
-		logic.wyswietl();
-		log.error("Wybrano okno Tables");
+		price.textProperty().setValue(String.valueOf(logic.finalPrice()));
 	}
 
 	public void checkBoxText() {
 		List<ProductVersion> versionList = new ArrayList<>();
 		versionList = dbDirector.odczytVersion().getDbList();
-		checkBox1.setText(versionList.get(0).getName() + ": " + versionList.get(0).getDescription());
-		checkBox2.setText(versionList.get(1).getName() + ": " + versionList.get(1).getDescription());
-		// checkBox3.setText(versionList.get(2).getName()+": "+
+		checkBox1SG.setText(versionList.get(0).getName() + ": " + versionList.get(0).getDescription());
+		checkBox2SG.setText(versionList.get(1).getName() + ": " + versionList.get(1).getDescription());
+		// checkBox3SG.setText(versionList.get(2).getName()+": "+
 		// versionList.get(2).getDescription());
-		// checkBox4.setText(versionList.get(3).getName()+": "+
+		// checkBox4SG.setText(versionList.get(3).getName()+": "+
 		// versionList.get(3).getDescription());
-		// checkBox5.setText(versionList.get(4).getName()+": "+
+		// checkBox5SG.setText(versionList.get(4).getName()+": "+
 		// versionList.get(4).getDescription());
-		properties.setCheckBox1Price(new SimpleFloatProperty(versionList.get(0).getPrice()));
-		properties.setCheckBox2Price(new SimpleFloatProperty(versionList.get(1).getPrice()));
-		// properties.setCheckBox3Price(new
+		properties.setCheckBox1SGPrice(new SimpleFloatProperty(versionList.get(0).getPrice()));
+		properties.setCheckBox2SGPrice(new SimpleFloatProperty(versionList.get(1).getPrice()));
+		// properties.setCheckBox3SGPrice(new
 		// SimpleFloatProperty(versionList.get(2).getPrice()));
-		// properties.setCheckBox4Price(new
+		// properties.setCheckBox4SGPrice(new
 		// SimpleFloatProperty(versionList.get(3).getPrice()));
-		// properties.setCheckBox5Price(new
+		// properties.setCheckBox5SGPrice(new
 		// SimpleFloatProperty(versionList.get(4).getPrice()));
-		log.info(String.valueOf(versionList.get(0).getPrice()));
-		log.info(String.valueOf(versionList.get(1).getPrice()));
 	}
 
 	private void checkBoxBinds() {
-		checkBox1.selectedProperty().bindBidirectional(properties.getCheckBox1());
-		checkBox2.selectedProperty().bindBidirectional(properties.getCheckBox2());
-		// checkBox3.selectedProperty().bindBidirectional(properties.getCheckBox3());
-		// checkBox4.selectedProperty().bindBidirectional(properties.getCheckBox4());
-		// checkBox5.selectedProperty().bindBidirectional(properties.getCheckBox5());
+		checkBox1SG.selectedProperty().bindBidirectional(properties.getCheckBox1SG());
+		checkBox2SG.selectedProperty().bindBidirectional(properties.getCheckBox2SG());
+		// checkBox3SG.selectedProperty().bindBidirectional(properties.getCheckBox3SG());
+		// checkBox4SG.selectedProperty().bindBidirectional(properties.getCheckBox4SG());
+		// checkBox5SG.selectedProperty().bindBidirectional(properties.getCheckBox5SG());
 	}
 
 	public void setMainController(MainController mainController) {

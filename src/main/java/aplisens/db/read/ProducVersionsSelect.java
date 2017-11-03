@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import aplisens.db.listsTypes.ProductVersion;
 import aplisens.view.controllers.Properties;
-import toms.aplisens1.Tag;
 
 public class ProducVersionsSelect implements ListsInterface {
 

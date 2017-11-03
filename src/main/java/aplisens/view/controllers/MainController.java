@@ -14,13 +14,13 @@ import javafx.scene.layout.BorderPane;
 
 public class MainController {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
-
+	private final Logger log = LoggerFactory.getLogger(getClass());
+	private TablesController tablesController;
+	
+	
 	@FXML
 	private BorderPane mainBorderPane;
-
-	private TablesController tablesController;
-
+	
 	@FXML
 	public void initialize() {
 		setWindow("/fxml/Tables.fxml",tablesController);

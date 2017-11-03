@@ -1,4 +1,4 @@
-package aplisens.view;
+package aplisens;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
