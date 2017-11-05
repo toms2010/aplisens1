@@ -7,14 +7,14 @@ import org.slf4j.LoggerFactory;
 
 public class DbAdress {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private String dbUrl;
 	private String user;
 	private String pass;
 	File file;
 	RandomAccessFile raf = null;
 
-	public DbAdress getDbAdress(String fileName) {
+	DbAdress getDbAdress(String fileName) {
 
 		file = new File(fileName);
 

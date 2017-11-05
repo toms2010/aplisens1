@@ -12,21 +12,21 @@ import org.slf4j.LoggerFactory;
 import aplisens.db.listsTypes.ProductVersion;
 import aplisens.view.controllers.Properties;
 
-public class ProducVersionsSelect implements ListsInterface {
+public class ProductVersionsSelect implements ListsInterface {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 	private List<ProductVersion> dbList;
-	private Properties proper = Properties.getInstance();
+	private Properties properties = Properties.getInstance();
 
 	public ResultSet selectMethod(Statement myStmt) throws SQLException {
 		dbList = new ArrayList<>();
-		String commandSQL = "select nazwa, cena, opis FROM wykonania_" + proper.getProductTag().get()
-				+ " WHERE wystepowanie LIKE '%" + proper.getModelTag().get() + "%'";
+		String commandSQL = "select nazwa, cena, opis FROM wykonania_" + properties.getTypeTag().get()
+				+ " WHERE wystepowanie LIKE '%" + properties.getModelTag().get() + "%'";
 		log.info(commandSQL);
 		myRs = myStmt.executeQuery(commandSQL);
 		while (myRs.next()) {
-			dbList.add(new ProductVersion(myRs.getString("nazwa"), myRs.getString("opis"), myRs.getFloat("cena"), false));
+			dbList.add(new ProductVersion(myRs.getString("nazwa"), myRs.getString("opis"), myRs.getFloat("cena")));
 		}
 		log.debug(dbList.toString());
 		return myRs;

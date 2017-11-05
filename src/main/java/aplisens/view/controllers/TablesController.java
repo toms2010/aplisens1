@@ -16,10 +16,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class TablesController implements ViewControllerInterface {
+public class TablesController implements ViewControllersInterface {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
-
+	private static final String PC_FXML = "/fxml/PC.fxml";
+	private static final String SG_FXML = "/fxml/SG.fxml";
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private MainController mainController;
 	private DbDirector dbDirector = new DbDirector();
 	private Properties property = Properties.getInstance();
@@ -39,48 +40,49 @@ public class TablesController implements ViewControllerInterface {
 	private TableColumn<ProductModel, String> productDescriptionColumn;
 	@FXML
 	private TableColumn<ProductModel, Float> productPriceColumn;
-	
+
 	@FXML
-	private Button confirm;
+	private Button confirmButton;
 
 	@FXML
 	public void initialize() {
-		ObservableList<ProductType> data = FXCollections.observableArrayList(dbDirector.odczytType().getDbList());
+		ObservableList<ProductType> data = FXCollections.observableArrayList(dbDirector.readType().getDbList());
 		typeTagColumn.setCellValueFactory(new PropertyValueFactory<>("tag"));
 		typeNameColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 		typeTableView.setItems(data);
-		confirm.setDisable(true);
+		confirmButton.setDisable(true);
 	}
-		
+
 	@FXML
 	private void selectedType() {
-		property.setProductTag(new SimpleStringProperty(typeTableView.getSelectionModel().getSelectedItem().getTag()));
-		log.debug("Wybrano produkt typu: "+ property.getProductTag());
+		property.setTypeTag(new SimpleStringProperty(typeTableView.getSelectionModel().getSelectedItem().getTag()));
+		log.debug("Wybrano produkt typu: " + property.getTypeTag());
 		secondTable();
 	}
 
 	@FXML
 	private void selectedProduct() {
-		property.setModelTag(new SimpleStringProperty(productTableViwe.getSelectionModel().getSelectedItem().getName()));
-		log.debug("Wybrano model produktu: "+ property.getModelTag());
-		property.setModelPrice(new SimpleFloatProperty(productTableViwe.getSelectionModel().getSelectedItem().getPrice()));
-		log.debug("Cena produktu: "+ property.getModelPrice());
-		confirm.setDisable(false);
+		property.setModelTag(
+				new SimpleStringProperty(productTableViwe.getSelectionModel().getSelectedItem().getName()));
+		log.debug("Wybrano model produktu: " + property.getModelTag());
+		property.setModelPrice(
+				new SimpleFloatProperty(productTableViwe.getSelectionModel().getSelectedItem().getPrice()));
+		log.debug("Cena produktu: " + property.getModelPrice());
+		confirmButton.setDisable(false);
+		property.setTitle(
+				new SimpleStringProperty(productTableViwe.getSelectionModel().getSelectedItem().getDescription()));
 	}
-	
-	
+
 	@FXML
 	private void confirmProduct() {
-		if ("SG".equals(property.getProductTag().get())) {
-			mainController.setWindow("/fxml/SG.fxml", new SGController());
-			log.debug("Wybrano okno SG");	
-		}
-		else if("PC".equals(property.getProductTag().get())) {
-			mainController.setWindow("/fxml/PC.fxml", new PCController());
-			log.debug("Wybrano okno PC");	
-		}
-		else {
-			log.error("Nie wybrano produktu!");	
+		if ("SG".equals(property.getTypeTag().get())) {
+			mainController.setWindow(SG_FXML, new SGController());
+			log.info("Wybrano okno SG");
+		} else if ("PC".equals(property.getTypeTag().get())) {
+			mainController.setWindow(PC_FXML, new PCController());
+			log.info("Wybrano okno PC");
+		} else {
+			log.error("Nie wybrano produktu!");
 		}
 	}
 
@@ -89,7 +91,7 @@ public class TablesController implements ViewControllerInterface {
 		productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
 		productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 		productTableViwe.getItems().clear();
-		productTableViwe.getItems().addAll(dbDirector.odczytModel().getDbList());
+		productTableViwe.getItems().addAll(dbDirector.readModel().getDbList());
 	}
 
 	public void setMainController(MainController mainController) {

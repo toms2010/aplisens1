@@ -18,7 +18,7 @@ public class ProductParameters {
 
 	@Override
 	public String toString() {
-		return "Parametry urządzenia:  nazwa parametru: " + name + ", wartosc=" + value;
+		return "Parametry urządzenia:  nazwa parametru: " + name + ", wartosc=" + value+"\n";
 	}
 
 }

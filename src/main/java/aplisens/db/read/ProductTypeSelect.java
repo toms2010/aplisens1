@@ -14,7 +14,7 @@ import aplisens.db.listsTypes.ProductType;
 
 public class ProductTypeSelect implements ListsInterface {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private List<ProductType> dbList;
 	private ResultSet myRs = null;
 

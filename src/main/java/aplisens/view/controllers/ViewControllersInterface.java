@@ -1,6 +1,6 @@
 package aplisens.view.controllers;
 
-public interface ViewControllerInterface {
+public interface ViewControllersInterface {
 	
 	public void setMainController(MainController mainController);
 

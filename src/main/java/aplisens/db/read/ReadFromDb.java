@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 public class ReadFromDb {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 
 	public void readFromDb(Statement myStmt, ListsInterface list) {

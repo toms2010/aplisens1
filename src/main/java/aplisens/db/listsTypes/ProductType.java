@@ -19,7 +19,7 @@ public class ProductType {
 
 	@Override
 	public String toString() {
-		return "Typ urządzenia:  tag: " + tag + ", opis: " + description;
+		return "Typ urządzenia:  tag: " + tag + ", opis: " + description+"\n";
 	}
 
 }

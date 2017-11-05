@@ -6,11 +6,11 @@ import org.slf4j.LoggerFactory;
 
 public class DbConnect {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private Connection myConn = null;
 	private Statement myStmt = null;
 
-	public Statement getStatement(DbAdress dbAdress) {
+	Statement getStatement(DbAdress dbAdress) {
 		try {
 			myConn = DriverManager.getConnection(dbAdress.getDbUrl(), dbAdress.getUser(), dbAdress.getUser());
 			myStmt = myConn.createStatement();
@@ -21,7 +21,7 @@ public class DbConnect {
 		return myStmt;
 	}
 
-	public void dbDisconnecting(Statement myStmt) {
+	public void dbDisconnect(Statement myStmt) {
 		if (myStmt != null) {
 			try {
 				myStmt.close();

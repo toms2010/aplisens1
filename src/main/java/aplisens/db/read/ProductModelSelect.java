@@ -14,15 +14,15 @@ import aplisens.view.controllers.Properties;
 
 public class ProductModelSelect implements ListsInterface {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	private ResultSet myRs = null;
 	private List<ProductModel> dbList;
-	private Properties proper = Properties.getInstance();
+	private Properties properties = Properties.getInstance();
 
 	public ResultSet selectMethod(Statement myStmt) throws SQLException {
 		dbList = new ArrayList<>();
 		String commandSQL = "SELECT nazwa, opis, cena , dok_opis FROM produkty WHERE tag LIKE '"
-				+ proper.getProductTag().get() + "'";
+				+ properties.getTypeTag().get() + "'";
 		myRs = myStmt.executeQuery(commandSQL);
 		while (myRs.next()) {
 			dbList.add(new ProductModel(myRs.getString("nazwa"), myRs.getString("dok_opis"), myRs.getFloat("cena")));

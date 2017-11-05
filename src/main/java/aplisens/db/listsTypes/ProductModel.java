@@ -24,7 +24,7 @@ public class ProductModel {
 
 	@Override
 	public String toString() {
-		return "Model produktu:  nazwa: " + name + ", opis: " + description + ", cena: " + price + " zł";
+		return "Model produktu:  \n nazwa: " + name + ", \n opis: " + description + ", \n cena: " + price + " zł \n";
 	}
 
 }
