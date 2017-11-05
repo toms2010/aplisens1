@@ -3,7 +3,9 @@ package aplisens;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import aplisens.view.controllers.Properties;
+import aplisens.view.ConnectorChoiceBox;
+import aplisens.view.HousingChoiceBox;
+import aplisens.view.Properties;
 
 public class CountPC {
 
@@ -24,57 +26,15 @@ public class CountPC {
 	}
 
 	private float housingTypePrice() {
-		float price = 0;
 		String type = properties.getHousingType().get();
-		switch (type) {
-		case "PD":
-			price= 0;
-			break;
-		case "PZ":
-			price= 220;
-			break;
-		case "PK":
-			price= 90;
-			break;
-		case "PM12":
-			price= 170;
-			break;
-		case "SG":
-			price= 250;
-			break;
-		}
 		log.debug(type);
-		return price;
+		return HousingChoiceBox.valueOf(type).getPrice();
 	}
 
 	private float connectorTypePrice() {
-		float price = 0;
 		String type = properties.getConnectorType().get();
-		switch (type) {
-		case "M20x1,5":
-			price= 0;
-			break;
-		case "G1/2":
-			price= 0;
-			break;
-		case "1/2NPT":
-			price= 120;
-			break;
-		case "G1/4":
-			price= 30;
-			break;
-		case "CM30x2":
-			price= 130;
-			break;
-		case "CG1":
-			price= 210;
-			break;
-		case "CG1/2":
-			price= 180;
-			break;
-		}
 		log.debug(type);
-		return price;
+		return ConnectorChoiceBox.valueOf(type).getPrice();
 	}
 	
 	public float versionExtraPrice() {

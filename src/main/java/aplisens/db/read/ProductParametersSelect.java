@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import aplisens.db.listsTypes.ProductParameters;
-import aplisens.view.controllers.Properties;
+import aplisens.view.Properties;
 
 public class ProductParametersSelect implements ListsInterface {
 

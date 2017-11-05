@@ -10,6 +10,8 @@ import aplisens.CountSG;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductParameters;
 import aplisens.db.listsTypes.ProductVersion;
+import aplisens.view.CableChoiceBox;
+import aplisens.view.Properties;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -33,6 +35,7 @@ public class SGController implements ViewControllersInterface {
 	private Properties properties = Properties.getInstance();
 	private CountSG countSG = new CountSG();
 
+	
 	@FXML
 	private Label title;
 	@FXML
@@ -71,7 +74,7 @@ public class SGController implements ViewControllersInterface {
 	@FXML
 	public void initialize() {
 		// --------Rodzaje kabli
-		cableType.getItems().addAll("POLIURETAN", "PU PZH", "ETFE", "Teflon");
+		cableType.getItems().addAll(CableChoiceBox.getCableTypeList());
 		cableType.getSelectionModel().selectFirst();
 		properties.setCableType(new SimpleStringProperty(cableType.getSelectionModel().getSelectedItem()));
 		cableType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

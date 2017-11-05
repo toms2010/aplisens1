@@ -10,6 +10,9 @@ import aplisens.CountPC;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductParameters;
 import aplisens.db.listsTypes.ProductVersion;
+import aplisens.view.ConnectorChoiceBox;
+import aplisens.view.HousingChoiceBox;
+import aplisens.view.Properties;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -73,14 +76,13 @@ public class PCController implements ViewControllersInterface {
 	@FXML
 	public void initialize() {
 		// --------ChoiceBox
-		// TODO rozważyć zastosowanie Enum...
-		housingType.getItems().addAll("PD", "PZ", "PK", "PM12", "SG");
+		housingType.getItems().addAll(HousingChoiceBox.getHousingTypeList());
 		housingType.getSelectionModel().selectFirst();
 		properties.setHousingType(new SimpleStringProperty(housingType.getSelectionModel().getSelectedItem()));
 		housingType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				properties.setHousingType(new SimpleStringProperty(newValue));
 		});
-		connectorType.getItems().addAll("M20x1,5", "G1/2", "1/2NPT", "G1/4", "CM30x2", "CG1", "CG1/2");
+		connectorType.getItems().addAll(ConnectorChoiceBox.getConnectorTypeList());
 		connectorType.getSelectionModel().selectFirst();
 		properties.setConnectorType(new SimpleStringProperty(housingType.getSelectionModel().getSelectedItem()));
 		connectorType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {

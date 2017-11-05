@@ -3,7 +3,8 @@ package aplisens;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import aplisens.view.controllers.Properties;
+import aplisens.view.CableChoiceBox;
+import aplisens.view.Properties;
 
 public class CountSG {
 
@@ -23,23 +24,10 @@ public class CountSG {
 
 	private float cableExtraPrice() {
 		int length = properties.getCableLength().get();
-		int typePrice = 0;
+		float typePrice = 0;
 		String type = properties.getCableType().get();
+		typePrice = CableChoiceBox.valueOf(type).getPrice();
 		log.debug(type);
-		switch (type) {
-		case "POLIURETAN":
-			typePrice = 9;
-			break;
-		case "PU PZH":
-			typePrice = 12;
-			break;
-		case "ETFE":
-			typePrice = 15;
-			break;
-		case "Teflon":
-			typePrice = 25;
-			break;
-		}
 		return length * typePrice;
 	}
 
