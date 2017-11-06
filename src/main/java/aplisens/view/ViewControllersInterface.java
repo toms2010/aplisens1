@@ -1,4 +1,4 @@
-package aplisens.view.controllers;
+package aplisens.view;
 
 public interface ViewControllersInterface {
 	

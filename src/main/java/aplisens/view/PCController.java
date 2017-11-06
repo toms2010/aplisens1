@@ -1,4 +1,4 @@
-package aplisens.view.controllers;
+package aplisens.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,13 +6,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import aplisens.CountPC;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductParameters;
 import aplisens.db.listsTypes.ProductVersion;
-import aplisens.view.ConnectorChoiceBox;
-import aplisens.view.HousingChoiceBox;
-import aplisens.view.Properties;
+import aplisens.logic.ConnectorChoiceBox;
+import aplisens.logic.CountFinalPrice;
+import aplisens.logic.HousingChoiceBox;
+import aplisens.logic.Properties;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -34,7 +34,7 @@ public class PCController implements ViewControllersInterface {
 	private MainController mainController;
 	private DbDirector dbDirector = new DbDirector();
 	private Properties properties = Properties.getInstance();
-	private CountPC countPC = new CountPC();
+	private CountFinalPrice countFinalPrice = new CountFinalPrice();
 
 	@FXML
 	private Label title;
@@ -125,7 +125,7 @@ public class PCController implements ViewControllersInterface {
 
 	@FXML
 	public void countPrice() {
-		price.textProperty().setValue(String.valueOf(countPC.countFinalPrice()));
+		price.textProperty().setValue(String.valueOf(countFinalPrice.countFinalPricePC()));
 	}
 
 	public void checkBoxText() {

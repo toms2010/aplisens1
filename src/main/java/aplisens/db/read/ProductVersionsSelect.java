@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import aplisens.db.listsTypes.ProductVersion;
-import aplisens.view.Properties;
+import aplisens.logic.Properties;
 
 public class ProductVersionsSelect implements ListsInterface {
 

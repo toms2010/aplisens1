@@ -1,4 +1,4 @@
-package aplisens.view;
+package aplisens.logic;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.FloatProperty;

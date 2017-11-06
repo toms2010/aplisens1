@@ -1,4 +1,4 @@
-package aplisens.view;
+package aplisens.logic;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package aplisens.view.controllers;
+package aplisens.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import aplisens.CountSG;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductParameters;
 import aplisens.db.listsTypes.ProductVersion;
-import aplisens.view.CableChoiceBox;
-import aplisens.view.Properties;
+import aplisens.logic.CableChoiceBox;
+import aplisens.logic.CountFinalPrice;
+import aplisens.logic.Properties;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -33,9 +33,8 @@ public class SGController implements ViewControllersInterface {
 	private MainController mainController;
 	private DbDirector dbDirector = new DbDirector();
 	private Properties properties = Properties.getInstance();
-	private CountSG countSG = new CountSG();
+	private CountFinalPrice countFinalPrice = new CountFinalPrice();
 
-	
 	@FXML
 	private Label title;
 	@FXML
@@ -118,7 +117,7 @@ public class SGController implements ViewControllersInterface {
 
 	@FXML
 	public void countPrice() {
-		price.textProperty().setValue(String.valueOf(countSG.countFinalPrice()));
+		price.textProperty().setValue(String.valueOf(countFinalPrice.countFinalPriceSG()));
 
 	}
 

@@ -1,2 +1,6 @@
-toms\aplisens1\TestPierwszy.class
-toms\aplisens1\AppTest.class
+aplisens\logic\CountPCConnectorTest.class
+aplisens\logic\CountSGRangeTest.class
+aplisens\logic\CountSGCableTest.class
+aplisens\logic\AllCountTest.class
+aplisens\logic\CountPCRangeTest.class
+aplisens\logic\CountPCHousingTest.class

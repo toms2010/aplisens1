@@ -1,4 +1,4 @@
-package aplisens.view.controllers;
+package aplisens.view;
 
 import java.io.IOException;
 

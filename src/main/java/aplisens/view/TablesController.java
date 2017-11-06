@@ -1,4 +1,4 @@
-package aplisens.view.controllers;
+package aplisens.view;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductModel;
 import aplisens.db.listsTypes.ProductType;
-import aplisens.view.Properties;
+import aplisens.logic.Properties;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
