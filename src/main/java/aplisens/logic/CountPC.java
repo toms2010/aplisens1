@@ -14,11 +14,11 @@ public class CountPC {
 	}
 
 	float housingTypePrice(String housingType) {
-		return HousingChoiceBox.valueOf(housingType).getPrice();
+		return ConnectorChoiceBox.valueOf(housingType).getPrice();
 	}
 
 	float connectorTypePrice(String connectorType) {
-		return ConnectorChoiceBox.valueOf(connectorType).getPrice();
+		return HousingChoiceBox.valueOf(connectorType).getPrice();
 	}
 	
 }

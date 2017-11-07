@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum HousingChoiceBox {
-	
-	PD(0), PZ(220), PK(90), PM12(170), SG(250);
+	M20x1(0), G12(0), NPT12(120), G14(30), CM30x2(130), CG1(210), CG12(180);
 
 	private float price;
 	static List<String> housingTypeList = new ArrayList<>();
@@ -25,5 +24,5 @@ public enum HousingChoiceBox {
 	public float getPrice() {
 		return price;
 	}
-	
+
 }

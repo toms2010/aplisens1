@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import aplisens.db.DbDirector;
 import aplisens.db.listsTypes.ProductParameters;
 import aplisens.db.listsTypes.ProductVersion;
-import aplisens.logic.ConnectorChoiceBox;
-import aplisens.logic.CountFinalPrice;
 import aplisens.logic.HousingChoiceBox;
+import aplisens.logic.CountFinalPrice;
+import aplisens.logic.ConnectorChoiceBox;
 import aplisens.logic.Properties;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -45,9 +45,9 @@ public class PCController implements ViewControllersInterface {
 	@FXML
 	private TextField rangeHigh;
 	@FXML
-	private ChoiceBox<String> housingType;
-	@FXML
 	private ChoiceBox<String> connectorType;
+	@FXML
+	private ChoiceBox<String> housingType;
 	@FXML
 	private Label price;
 	@FXML
@@ -76,16 +76,16 @@ public class PCController implements ViewControllersInterface {
 	@FXML
 	public void initialize() {
 		// --------ChoiceBox
-		housingType.getItems().addAll(HousingChoiceBox.getHousingTypeList());
-		housingType.getSelectionModel().selectFirst();
-		properties.setHousingType(new SimpleStringProperty(housingType.getSelectionModel().getSelectedItem()));
-		housingType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-				properties.setHousingType(new SimpleStringProperty(newValue));
-		});
 		connectorType.getItems().addAll(ConnectorChoiceBox.getConnectorTypeList());
 		connectorType.getSelectionModel().selectFirst();
-		properties.setConnectorType(new SimpleStringProperty(housingType.getSelectionModel().getSelectedItem()));
+		properties.setHousingType(new SimpleStringProperty(connectorType.getSelectionModel().getSelectedItem()));
 		connectorType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+				properties.setHousingType(new SimpleStringProperty(newValue));
+		});
+		housingType.getItems().addAll(HousingChoiceBox.getHousingTypeList());
+		housingType.getSelectionModel().selectFirst();
+		properties.setConnectorType(new SimpleStringProperty(housingType.getSelectionModel().getSelectedItem()));
+		housingType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				properties.setConnectorType(new SimpleStringProperty(newValue));
 		});
 		// --------Wykonania

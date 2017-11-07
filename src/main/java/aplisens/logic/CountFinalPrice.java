@@ -7,13 +7,19 @@ public class CountFinalPrice {
 	
 	private Properties properties = Properties.getInstance();
 	private final Logger log = LoggerFactory.getLogger(getClass());
-	private CountPC countPC = new CountPC();
-	private CountSG countSG = new CountSG();
+	private CountPC countPC;
+	private CountSG countSG;
 	private float itemPrice;
 	private float totalPrice;
 	private float versionPrice;
+	
+	public CountFinalPrice() {
+		countPC = new CountPC();
+		countSG = new CountSG();
+	}
 
 	public float countFinalPricePC() {
+		totalPrice=0;
 		itemPrice = countPC.rangePrice(properties.getRangeLow().get(),properties.getRangeHigh().get());
 		totalPrice += itemPrice;
 		log.debug("Range: " + itemPrice);
@@ -36,6 +42,7 @@ public class CountFinalPrice {
 	}
 
 	public float countFinalPriceSG() {
+		totalPrice=0;
 		itemPrice = countSG.rangePrice(properties.getMeasurementRange().get());
 		totalPrice += itemPrice;
 		log.debug("Range: " + itemPrice);

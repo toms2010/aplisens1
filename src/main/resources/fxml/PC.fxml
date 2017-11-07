@@ -95,7 +95,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="housingType" prefWidth="150.0">
+                              <ChoiceBox fx:id="connectorType"  prefWidth="150.0">
                                  <opaqueInsets>
                                     <Insets bottom="20.0" />
                                  </opaqueInsets>
@@ -112,7 +112,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox fx:id="connectorType" prefWidth="150.0">
+                              <ChoiceBox fx:id="housingType" prefWidth="150.0">
                                  <opaqueInsets>
                                     <Insets bottom="20.0" />
                                  </opaqueInsets>

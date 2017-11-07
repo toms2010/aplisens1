@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum ConnectorChoiceBox {
-	M20x1(0), G12(0), NPT12(120), G14(30), CM30x2(130), CG1(210), CG12(180);
+	
+	PD(0), PZ(220), PK(90), PM12(170), SG(250);
 
 	private float price;
 	static List<String> connectorTypeList = new ArrayList<>();
@@ -24,5 +25,5 @@ public enum ConnectorChoiceBox {
 	public float getPrice() {
 		return price;
 	}
-
+	
 }
