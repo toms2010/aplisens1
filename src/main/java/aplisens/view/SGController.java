@@ -1,14 +1,13 @@
 package aplisens.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import aplisens.db.DbDirector;
-import aplisens.db.listsTypes.ProductParameters;
-import aplisens.db.listsTypes.ProductVersion;
+import aplisens.db.entity.ProductParametersSG;
+import aplisens.db.entity.ProductVersionSG;
 import aplisens.logic.CableChoiceBox;
 import aplisens.logic.CountFinalPrice;
 import aplisens.logic.Properties;
@@ -64,11 +63,11 @@ public class SGController implements ViewControllersInterface {
 	private CheckBox checkBox5;
 
 	@FXML
-	private TableView<ProductParameters> parametersTableView;
+	private TableView<ProductParametersSG> parametersTableView;
 	@FXML
-	private TableColumn<ProductParameters, String> parametersNameColumn;
+	private TableColumn<ProductParametersSG, String> parametersNameColumn;
 	@FXML
-	private TableColumn<ProductParameters, String> parametersValueColumn;
+	private TableColumn<ProductParametersSG, String> parametersValueColumn;
 
 	@FXML
 	public void initialize() {
@@ -98,8 +97,8 @@ public class SGController implements ViewControllersInterface {
 		});
 		length.textProperty().bindBidirectional(properties.getCableLength(), new NumberStringConverter());
 		// --------Tabela ProductParameters
-		ObservableList<ProductParameters> data = FXCollections
-				.observableArrayList(dbDirector.readParameters().getDbList());
+		ObservableList<ProductParametersSG> data = FXCollections
+				.observableArrayList(dbDirector.readParametersSG().getDbList());
 		parametersNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		parametersValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 		parametersTableView.setItems(data);
@@ -122,8 +121,7 @@ public class SGController implements ViewControllersInterface {
 	}
 
 	public void checkBoxText() {
-		List<ProductVersion> versionList = new ArrayList<>();
-		versionList = dbDirector.readVersion().getDbList();
+		List<ProductVersionSG> versionList = dbDirector.readVersionSG().getDbList();
 		checkBox1.setText(versionList.get(0).getName() + ": " + versionList.get(0).getDescription());
 		checkBox2.setText(versionList.get(1).getName() + ": " + versionList.get(1).getDescription());
 		checkBox3.setText(versionList.get(2).getName()+": "+versionList.get(2).getDescription());

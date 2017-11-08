@@ -1,55 +1,48 @@
 package aplisens.db;
 
-import java.sql.Statement;
-
-import aplisens.db.read.ProductModelSelect;
-import aplisens.db.read.ProductVersionsSelect;
-import aplisens.db.read.ProductParametersSelect;
-import aplisens.db.read.ProductTypeSelect;
-import aplisens.db.read.ReadFromDb;
+import aplisens.db.read.ReadProductModel;
+import aplisens.db.read.ReadProductVersionsPC;
+import aplisens.db.read.ReadProductVersionsSG;
+import aplisens.db.read.ReadProductParametersPC;
+import aplisens.db.read.ReadProductParametersSG;
+import aplisens.db.read.ReadProductType;
 
 public class DbDirector {
-	private static final String FILE_NAME = "src/main/resources/baza.txt";
 
-	private DbAdress adress = new DbAdress();
-	private DbConnect connect = new DbConnect();
-	private Statement myStmt;
-	private ReadFromDb read = new ReadFromDb();
+	private ReadProductType readProductType = new ReadProductType();
+	private ReadProductModel readProductModel = new ReadProductModel();
+	private ReadProductVersionsPC readProductVersionsPC = new ReadProductVersionsPC();
+	private ReadProductVersionsSG readProductVersionsSG = new ReadProductVersionsSG();
+	private ReadProductParametersPC readProductParametersPC = new ReadProductParametersPC();
+	private ReadProductParametersSG readProductParametersSG = new ReadProductParametersSG();
 
-	private ProductTypeSelect type = new ProductTypeSelect();
-	private ProductModelSelect model = new ProductModelSelect();
-	private ProductParametersSelect parameters = new ProductParametersSelect();
-	private ProductVersionsSelect versions = new ProductVersionsSelect();
-
-	public DbDirector() {
-		adress.getDbAdress(FILE_NAME);
+	public ReadProductType readType() {
+		readProductType.read();
+		return readProductType;
 	}
 
-	public ProductTypeSelect readType() {
-		myStmt = connect.getStatement(adress);
-		read.readFromDb(myStmt, type);
-		connect.dbDisconnect(myStmt);
-		return type;
+	public ReadProductModel readModel() {
+		readProductModel.read();
+		return readProductModel;
 	}
 
-	public ProductModelSelect readModel() {
-		myStmt = connect.getStatement(adress);
-		read.readFromDb(myStmt, model);
-		connect.dbDisconnect(myStmt);
-		return model;
+	public ReadProductParametersPC readParametersPC() {
+		readProductParametersPC.read();
+		return readProductParametersPC;
+	}
+	
+	public ReadProductParametersSG readParametersSG() {
+		readProductParametersSG.read();
+		return readProductParametersSG;
 	}
 
-	public ProductParametersSelect readParameters() {
-		myStmt = connect.getStatement(adress);
-		read.readFromDb(myStmt, parameters);
-		connect.dbDisconnect(myStmt);
-		return parameters;
+	public ReadProductVersionsPC readVersionPC() {
+		readProductVersionsPC.read();
+		return readProductVersionsPC;
 	}
-
-	public ProductVersionsSelect readVersion() {
-		myStmt = connect.getStatement(adress);
-		read.readFromDb(myStmt, versions);
-		connect.dbDisconnect(myStmt);
-		return versions;
+	
+	public ReadProductVersionsSG readVersionSG() {
+		readProductVersionsSG.read();
+		return readProductVersionsSG;
 	}
 }
